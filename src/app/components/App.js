@@ -38,7 +38,7 @@ export default class App extends React.Component {
     console.log(this.state);
     return(
       <div>
-        {this.state.token ? (<Dashboard token={this.state.token}/>) : (<Login />)}
+        {this.state.token ? (<Dashboard token={this.state.token} topArtists={this.state.topArtists} playlists={this.state.playlists}/>) : (<Login />)}
       </div>
      );
   }
