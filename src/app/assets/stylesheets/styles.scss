@@ -1,5 +1,94 @@
+$dk: #222;
+$accent: orange;
+@mixin flex-center{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
 html, body{
   font-family: sans-serif;
   letter-spacing: 0.5px;
   font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  & li{
+    padding: 10px 0 10px 10px;
+    box-sizing: border-box;
+    user-select: none;
+    border-bottom: 1px solid $accent;
+  }
+}
+
+// TOP ARTISTS COMPONENT
+.top-artists ul{
+  padding-top: 10px;
+  margin-top: 10px;
+  height: 300px;
+  overflow: scroll;
+  border-bottom: 2px solid $accent;
+}
+.top-artists li{
+  cursor: pointer;
+  transition: background 0.3s;
+  @media all and (min-width: 600px){
+    &:hover{
+      background: black;
+      color: white;
+      & .artist-img{
+        box-shadow: 0px 5px 2px rgba(white, 0.3);
+      }
+      & .artist-name{
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+}
+
+.top-artists li.selected{
+  .artist-img{
+    background-image: none!important;
+    background-color: $dk;
+    color: white;
+    transform: rotateY(180deg);
+    box-shadow: none;
+    border: 1px solid white;
+    &:before{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      font-size: 18px;
+      content: "\002713";
+      @include flex-center;
+      transform: rotateY(-180deg);
+    }
+  }
+}
+
+.artist-img{
+  width: 50px;
+  box-shadow: 0px 5px 2px rgba($dk, 0.2);
+  height: 50px;
+  background-size: auto 105%;
+  background-color: white;
+  background-position: center center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  transition: transform 0.5s, background-color 0.5s;
+}
+.artist-img, .artist-name{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px 5px;
+}
+.artist-name{
+  letter-spacing: 0.25px;
+  transition: all 0.3s;
 }
