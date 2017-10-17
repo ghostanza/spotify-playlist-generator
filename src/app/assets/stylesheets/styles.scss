@@ -21,7 +21,7 @@ ul{
     padding: 10px 0 10px 10px;
     box-sizing: border-box;
     user-select: none;
-    border-bottom: 1px solid $accent;
+    border-bottom: 1px solid rgba($dk, 0.2);
   }
 }
 
@@ -31,7 +31,10 @@ ul{
   margin-top: 10px;
   height: 300px;
   overflow: scroll;
-  border-bottom: 2px solid $accent;
+  border-bottom: 1px solid $accent;
+  border-top: 1px solid rgba(200,200,200,0.2);
+  box-shadow: inset 0px 5px 3px rgba(200,200,200,0.1);
+
 }
 .top-artists li{
   cursor: pointer;
@@ -40,9 +43,6 @@ ul{
     &:hover{
       background: black;
       color: white;
-      & .artist-img{
-        box-shadow: 0px 5px 2px rgba(white, 0.3);
-      }
       & .artist-name{
         letter-spacing: 0.5px;
       }
@@ -56,7 +56,6 @@ ul{
     background-color: $dk;
     color: white;
     transform: rotateY(180deg);
-    box-shadow: none;
     border: 1px solid white;
     &:before{
       position: absolute;
@@ -72,7 +71,6 @@ ul{
 
 .artist-img{
   width: 50px;
-  box-shadow: 0px 5px 2px rgba($dk, 0.2);
   height: 50px;
   background-size: auto 105%;
   background-color: white;
@@ -91,4 +89,27 @@ ul{
 .artist-name{
   letter-spacing: 0.25px;
   transition: all 0.3s;
+}
+
+// METER
+.selection-meter{
+  @include flex-center;
+  position: fixed;
+  bottom: 0;
+  background: $dk;
+  width: 100%;
+  padding: 5px 0;
+}
+.meter-item{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 0px 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(white, 0.2);
+  background: transparent;
+  transition: background 0.3s;
+  &.active{
+    background: white;
+  }
 }

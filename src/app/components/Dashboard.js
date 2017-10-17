@@ -1,6 +1,7 @@
 import React from 'react';
 import TopArtists from './TopArtists';
 import MyPlaylists from './MyPlaylists';
+import SelectionMeter from './SelectionMeter';
 
 export default class Dashboard extends React.Component {
   constructor(p){
@@ -36,6 +37,7 @@ export default class Dashboard extends React.Component {
     return(
       <div>
         <TopArtists artists={this.props.topArtists} updateSelected={this.updateSelected} selected={this.state.selected}/>
+        <SelectionMeter selected={this.state.selected}/>
       </div>
     )
   }
