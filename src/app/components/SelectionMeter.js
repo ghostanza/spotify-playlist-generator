@@ -7,7 +7,10 @@ export default class SelectionMeter extends React.Component {
         {
             Array.apply(null, {length: 5}).map((v,i)=>{
               return (
-                <div key={i} className={`meter-item ${this.props.selected.length >= (i+1) ? 'active' : ''}`}></div>
+                <div
+                  key={i}
+                  className={`meter-item ${this.props.selected.length >= (i+1) ? 'active' : ''}`}>
+                </div>
               )
             })
         }

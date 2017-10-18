@@ -15,7 +15,7 @@ export default class Dashboard extends React.Component {
     let newSelected = Array.from(this.state.selected);
     // the max number of items we can send is 5
     if(newSelected.length <= 4){
-      if(newSelected.indexOf(id) >= 0){
+      if(newSelected.includes(id)){
         newSelected.splice(newSelected.indexOf(id), 1);
       } else{
         newSelected.push(id);
@@ -26,7 +26,7 @@ export default class Dashboard extends React.Component {
     }
     // if there are more than 4 items in the selection list
     // allow for items to be removed but not added
-    else if(newSelected.indexOf(id) >= 0){
+    else if(newSelected.includes(id)){
         newSelected.splice(newSelected.indexOf(id), 1);
         this.setState((prev) => {
           return { ...prev, selected: newSelected }

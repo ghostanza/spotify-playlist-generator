@@ -17,7 +17,7 @@ export default class ArtistList extends React.Component {
             <li key={i.id}
               data-id={i.id}
               onClick={this.triggerSelection}
-              className={this.props.selected.indexOf(i.id) >= 0 ? "selected" : ""}>
+              className={this.props.selected.includes(i.id) ? "selected" : ""}>
               {i.images && i.images.length > 2 ? (<div className='artist-img' style={{'backgroundImage': `url(${i.images[2].url})`}}></div>) : ''}
               <span className='artist-name'>{i.name}</span>
             </li>
