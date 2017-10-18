@@ -67,16 +67,18 @@ ul{
   &:after{
     position: absolute;
     right: 10px;
-    content: "-";
+    content: "+";
+    transform: rotate(45deg);
     line-height: 40px;
     font-size: 16px;
+    transition: transform 0.2s;
   }
 }
 .tab-label.closed{
   background: transparent;
   color: $dk;
   &:after{
-    content: "+";
+    transform: rotate(0deg);
   }
 }
 
