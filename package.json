@@ -7,7 +7,7 @@
     "watch": "webpack --watch",
     "dev": "webpack-dev-server -d --hot --config webpack.config.js --watch",
     "start": "node src/server/server.js",
-    "try" : "NODE_ENV=development webpack && npm start",
+    "try": "NODE_ENV=development webpack && npm start",
     "build:dev": "NODE_ENV=development webpack",
     "build:prod": "NODE_ENV=production webpack"
   },
@@ -24,6 +24,7 @@
     "compression-webpack-plugin": "^0.4.0",
     "css-hot-loader": "^1.1.1",
     "css-loader": "^0.28.1",
+    "dotenv-webpack": "^1.5.4",
     "enzyme": "^2.8.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",

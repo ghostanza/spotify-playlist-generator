@@ -5,6 +5,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 const OptimizeCSSAssets = require('optimize-css-assets-webpack-plugin');
 const extractStyles = new ExtractTextPlugin('styles.css');
+const DotEnv = require('dotenv-webpack');
+const DotEnvPlugin = new DotEnv({path: path.resolve(__dirname,'./.env')});
 
 
 let config = {
@@ -60,7 +62,8 @@ let config = {
     ]
   },
   plugins: [
-    extractStyles
+    extractStyles,
+    DotEnvPlugin
   ],
   devServer: {
     contentBase: path.resolve(__dirname, './public'),
