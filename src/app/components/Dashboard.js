@@ -5,6 +5,7 @@ import List from './List';
 import Search from './Search';
 import SelectionMeter from './SelectionMeter';
 import Tab from './Tab';
+import {getRecommendations} from '../helpers/spotify';
 
 export default class Dashboard extends React.Component {
   constructor(p){
@@ -36,6 +37,22 @@ export default class Dashboard extends React.Component {
         });
     }
   }
+  // TODO:  Handle the recommendations received
+  // Right now it only fetches artist seeds
+  fetchRecommendations(){
+    if(this.props.token && this.state.selections.length > 0){
+      getRecommendations(this.props.token, { seed_artists: this.state.selections })
+        .then((res)=>{
+          if(res.data && res.data.tracks.length){
+            let tracks = [];
+            for(let i = 0; i < res.data.tracks.length; i++){
+              tracks.push({artist: res.data.tracks[i].artists[0].name, track: res.data.tracks[i].name, album: res.data.tracks[i].album.name});
+            }
+            console.log(tracks);
+          }
+        });
+    }
+  }
   render() {
     return(
       <div>
@@ -46,8 +63,9 @@ export default class Dashboard extends React.Component {
           <TopArtists artists={this.props.topArtists} updateSelected={this.updateSelected} selections={this.state.selections}/>
         </Tab>
         <Tab label="Genre Options">
-          <List items={this.props.genres} toggleSelected={this.updateSelected} selections={this.state.selections}/>
+          <List items={this.props.genres} type='genres' toggleSelected={this.updateSelected} selections={this.state.selections}/>
         </Tab>
+        <div onClick={this.fetchRecommendations.bind(this)}><h3>GET RECS</h3></div>
         <SelectionMeter selections={this.state.selections}/>
       </div>
     )

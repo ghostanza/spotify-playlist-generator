@@ -222,8 +222,8 @@ module.exports.getSearchResults = (token, searchType, query) => {
 
 module.exports.getRecommendations = (token, options) => {
   var config = { headers: {'Authorization' : `Bearer ${token}`}},
-      seed_artists = options.seed_artists.length ? options.seed_aritsts.join(',') : '',
-      seed_genres = options.seed_genres.length ? options.seed_genres.join(',') : '',
+      seed_artists = options.seed_artists && options.seed_artists.length ? options.seed_artists.join(',') : '',
+      seed_genres = options.seed_genres && options.seed_genres.length ? options.seed_genres.join(',') : '',
       limit = 75;
 
   return axios.get(`https://api.spotify.com/${version}/recommendations?seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=${limit}`, config);
