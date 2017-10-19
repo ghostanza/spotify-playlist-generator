@@ -1,5 +1,5 @@
 import React from 'react';
-import ArtistList from './ArtistList';
+import List from './List';
 
 export default class TopArtists extends React.Component {
   constructor(p){
@@ -24,16 +24,11 @@ export default class TopArtists extends React.Component {
   toggleSelected(id){
     this.props.updateSelected(id);
   }
-  toggleOpen(e){
-    e.target.classList.toggle('closed');
-  }
   render() {
     return(
-      <div className="top-artist-wrapper tab">
+      <div className="top-artists">
       {this.props.artists && Object.keys(this.props.artists).length > 0 ? (
-        <div className="top-artists">
-          <span className="tab-label closed" onClick={this.toggleOpen}>My Top Artists</span>
-          <div className="top-artists-list">
+        <div className="top-artists-content">
             <div className="time-range-container">
               {this.state.timeOptions.map((i)=>{
                 return (
@@ -45,14 +40,13 @@ export default class TopArtists extends React.Component {
                 )
               })}
             </div>
-            <ArtistList
-              artists={this.props.artists[this.state.topTime]}
-              selected={this.props.selected}
+            <List
+              items={this.props.artists[this.state.topTime]}
+              selections={this.props.selections}
               toggleSelected={this.toggleSelected}/>
-          </div>
         </div>
-        ) : ''}
-        </div>
+      ) : ('')}
+      </div>
     )
   }
 }
