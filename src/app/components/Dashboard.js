@@ -44,10 +44,16 @@ export default class Dashboard extends React.Component {
       getRecommendations(this.props.token, { seed_artists: this.state.selections })
         .then((res)=>{
           if(res.data && res.data.tracks.length){
-            let tracks = [];
+            let tracks = [],
+                artistCount = {};
             for(let i = 0; i < res.data.tracks.length; i++){
-              tracks.push({artist: res.data.tracks[i].artists[0].name, track: res.data.tracks[i].name, album: res.data.tracks[i].album.name});
+              let artist = res.data.tracks[i].artists[0].name,
+                  track = res.data.tracks[i].name,
+                  album = res.data.tracks[i].album.name;
+              tracks.push({artist, track, album});
+              artistCount[artist] = artistCount[artist]+1 || 1;
             }
+            console.log(artistCount);
             console.log(tracks);
           }
         });
