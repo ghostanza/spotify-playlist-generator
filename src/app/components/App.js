@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from './Login';
-import Dashboard from './Dashboard';
+import Main from './Main';
 import { getAllUserData, getRecommendationSeedGenres } from 'spotify';
 
 export default class App extends React.Component {
@@ -16,6 +16,7 @@ export default class App extends React.Component {
   }
   componentWillMount(){
     if(this.state.token && this.state.token != 'undefined'){
+      console.log('getting data');
       getAllUserData(this.state.token).then((res) => {
         var topArtists = {
           long_term: res[1][0].data && res[1][0].data.items ? res[1][0].data.items : [],
@@ -35,9 +36,10 @@ export default class App extends React.Component {
     }
   }
   render() {
+    console.log(this.state);
     return(
       <div>
-        {this.state.token ? (<Dashboard token={this.state.token} topArtists={this.state.topArtists} playlists={this.state.playlists} genres={this.state.genreOptions}/>) : (<Login />)}
+        {this.state.token ? (<Main token={this.state.token} topArtists={this.state.topArtists} playlists={this.state.playlists} genres={this.state.genreOptions}/>) : (<Login />)}
       </div>
      );
   }

@@ -6,19 +6,20 @@ export default class List extends React.Component {
     this.triggerSelection = this.triggerSelection.bind(this);
   }
   triggerSelection(e){
-    let id = e.currentTarget.dataset.id;
-    this.props.toggleSelected(id);
+    let info = JSON.parse(e.currentTarget.dataset.info);
+    this.props.toggleSelected(info);
   }
   render() {
+    let selected = this.props.selections.all.map((i) => { return i.id });
     return(
       <ul className={`list ${this.props.type ? this.props.type : ''}`}>
         {this.props.items.map((i) => {
           return (
-            <li key={typeof(i)=='object' ? i.id : i }
-              data-id={typeof(i)=='object' ? i.id : i }
+            <li key={i.id || i}
+              data-info={`{"id":"${i.id || i}","name":"${i.name || i}","type":"${typeof(i)=='object' ? 'artists' : 'genres'}"}`}
               onClick={this.triggerSelection}
               className={
-                (this.props.selections.includes(i.id) || this.props.selections.includes(i))
+                (this.props.selections.artists.includes(i.id) || this.props.selections.genres.includes(i))
                 ? "selected" : ""}
             >
               {

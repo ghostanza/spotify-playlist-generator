@@ -1,6 +1,6 @@
 import React from 'react';
 import List from './List';
-import {getSearchResults} from '../helpers/spotify';
+import {getSearchResults} from 'spotify';
 
 export default class Search extends React.Component {
   constructor(p){

@@ -19,6 +19,8 @@ let config = {
     extensions: ['.js', '.jsx', '.json', '.scss', '.sass', '.css', '.jpeg', '.jpg', '.gif', 'png'],
     alias: {
       components: path.resolve(__dirname, 'src/app/components'),
+      page: path.resolve(__dirname, 'src/app/components/page'),
+      page_elements: path.resolve(__dirname, 'src/app/components/page-elements'),
       spotify: path.resolve(__dirname, 'src/app/helpers/spotify.js')
     }
   },

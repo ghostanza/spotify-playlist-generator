@@ -224,9 +224,19 @@ module.exports.getRecommendations = (token, options) => {
   var config = { headers: {'Authorization' : `Bearer ${token}`}},
       seed_artists = options.seed_artists && options.seed_artists.length ? options.seed_artists.join(',') : '',
       seed_genres = options.seed_genres && options.seed_genres.length ? options.seed_genres.join(',') : '',
-      limit = 75;
+      limit = 100;
 
   return axios.get(`https://api.spotify.com/${version}/recommendations?seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=${limit}`, config);
+}
+
+// Make four of the same recommendations call
+// The front-end will filter through the results and compile only unique artists
+module.exports.getRecommendationsMultipleAttempts = (token, options) => {
+  return axios.all([
+    module.exports.getRecommendations(token, options),
+    module.exports.getRecommendations(token, options),
+    module.exports.getRecommendations(token, options)
+  ]);
 }
 
 module.exports.getRecommendationSeedGenres = (token) => {
@@ -234,6 +244,7 @@ module.exports.getRecommendationSeedGenres = (token) => {
 
   return axios.get(`https://api.spotify.com/${version}/recommendations/available-genre-seeds`, config);
 }
+
 
 
 /***** TODO *****
