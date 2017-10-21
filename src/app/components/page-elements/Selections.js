@@ -49,6 +49,7 @@ export default class Selections extends React.Component {
         </div>
         <div className="selections-list">
           <ul>
+            { this.state.prevRemovedSelections.length ? (<li className="undo" onClick={this.undo.bind(this)}>Undo Previous Removal</li>) : '' }
             {this.props.selections.all.map((i)=>{
               return(
                 <li key={i.id} data-type={i.type} data-info={JSON.stringify(i)} onClick={this.toggleSelected.bind(this)}>
@@ -57,7 +58,7 @@ export default class Selections extends React.Component {
                 </li>
               )
             })}
-            { this.state.prevRemovedSelections.length ? (<li className="undo" onClick={this.undo.bind(this)}>Undo Previous Removal</li>) : '' }
+            <li className="build" onClick={this.props.fetchRecommendations}>Build Playlist</li>
           </ul>
         </div>
       </div>

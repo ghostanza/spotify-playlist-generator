@@ -267,7 +267,7 @@ ul.list{
       border-bottom: 1px solid orange;
     }
     &.open + .selections-list{
-      height: 300px;
+      height: 350px;
       overflow-x: hidden;
       overflow-y: scroll;
     }
@@ -303,6 +303,14 @@ ul.list{
         text-align: right;
         font-size: 13px;
         letter-spacing: 0.75px;
+      }
+      &.build{
+        text-align: center;
+        font-weight: 700;
+        border-top: 1px solid $accent;
+        border-bottom: 1px solid $accent;
+        padding: 15px 0;
+        text-transform: uppercase;
       }
     }
     & .selection-name{

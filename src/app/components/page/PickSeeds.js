@@ -18,8 +18,7 @@ export default class PickSeeds extends React.Component {
         <Tab label="Genre Options">
           <List items={this.props.genreOptions} type='genres' toggleSelected={this.props.updateSelected} selections={this.props.selections}/>
         </Tab>
-        <div onClick={this.props.fetchRecommendations}><h3>GET RECS</h3></div>
-        <Selections selections={this.props.selections} toggleSelected={this.props.updateSelected}/>
+        <Selections selections={this.props.selections} toggleSelected={this.props.updateSelected} fetchRecommendations={this.props.fetchRecommendations}/>
       </div>
     )
   }

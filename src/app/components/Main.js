@@ -82,12 +82,10 @@ export default class Main extends React.Component {
                 tracks = [],
                 used = [];
             res.forEach((i) => {
-              console.log(i);
               if(i.data && i.data.tracks){
                 totalRecs.push(...i.data.tracks);
               }
             });
-            console.log(totalRecs);
             if(totalRecs.length){
               for(let i = 0; i < totalRecs.length; i++){
                 let rec = totalRecs[i];
