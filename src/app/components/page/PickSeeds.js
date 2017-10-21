@@ -3,7 +3,7 @@ import Tab from 'page_elements/Tab';
 import Search from 'page_elements/Search';
 import TopArtists from 'page_elements/TopArtists';
 import List from 'page_elements/List';
-import SelectionMeter from 'page_elements/SelectionMeter';
+import Selections from 'page_elements/Selections';
 
 export default class PickSeeds extends React.Component {
   render() {
@@ -19,7 +19,7 @@ export default class PickSeeds extends React.Component {
           <List items={this.props.genreOptions} type='genres' toggleSelected={this.props.updateSelected} selections={this.props.selections}/>
         </Tab>
         <div onClick={this.props.fetchRecommendations}><h3>GET RECS</h3></div>
-        <SelectionMeter selections={this.props.selections}/>
+        <Selections selections={this.props.selections} toggleSelected={this.props.updateSelected}/>
       </div>
     )
   }

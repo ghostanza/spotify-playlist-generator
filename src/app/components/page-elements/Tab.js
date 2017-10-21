@@ -2,12 +2,14 @@ import React from 'react';
 
 export default class Tab extends React.Component {
   toggleOpen(e){
-    let tabs = document.querySelectorAll('.tab-label');
+    let tabs = document.querySelectorAll('.tab-label'),
+        selectionsList = document.querySelector('.selections-toggle');
     tabs.forEach((tab)=>{
       if(tab != e.target){
         !tab.classList.contains('closed') ? tab.classList.add('closed') : '';
       }
     })
+    selectionsList.classList.contains('open') ? selectionsList.classList.remove('open') : '';
     e.target.classList.toggle('closed');
   }
   render() {

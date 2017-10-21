@@ -60,63 +60,69 @@ export default class Main extends React.Component {
     // allow for items to be removed but not added
     else if(isAlreadySelected){
         newSelected.all.splice(index, 1);
-        newSelected[info.type].splice(newSeleced[info.type].indexOf(info.id),1);
+        newSelected[info.type].splice(newSelected[info.type].indexOf(info.id),1);
         this.setState((prev) => {
           return { ...prev, selections: newSelected }
         });
     }
   }
-  // TODO:  Handle the recommendations received
-  // Right now it only fetches artist seeds
-  fetchRecommendations(){
+  fetchRecommendations(type){
     const TOTAL_RECOMMENDATIONS_ALLOWED = 30;
+    let fetchType = type == 'more' ? type : 'initial';
     if(this.props.token && this.state.selections.all.length > 0){
       this.setState({isFetching: true});
-      // makes four of the same call to get recommendations
-      // although slow, it increases the chances of you getting more unique artists
-      getRecommendationsMultipleAttempts(
-        this.props.token,
-        {seed_artists: this.state.selections.artists, seed_genres: this.state.selections.genres}
-      ).then((res) => {
-          let firstSet = res[0].data && res[0].data.tracks ? res[0].data.tracks : [],
-              secondSet = res[1].data && res[1].data.tracks ? res[1].data.tracks : [],
-              thirdSet = res[2].data && res[2].data.tracks ? res[2].data.tracks : [],
-              //fourthSet = res[3].data && res[3].data.tracks ? res[3].data.tracks : [],
-              totalRecs = Array.prototype.concat(firstSet, secondSet, thirdSet),
-              tracks = [],
-              used = [];
-          if(totalRecs.length){
-            for(let i = 0; i < totalRecs.length; i++){
-              let rec = totalRecs[i];
-              if(rec.artists.length && rec.artists[0].id){
-                // filter out the seed artists and any duplicate artists
-                // ensure that the returned track list is all different artists
-                if(!used.includes(rec.artists[0].id) && !this.state.selections.artists.includes(rec.artists[0].id)){
-                  used.push(rec.artists[0].id);
-                  tracks.push(rec);
+      if(fetchType == 'initial'){
+        // makes four of the same call to get recommendations
+        // although slow, it increases the chances of you getting more unique artists
+        getRecommendationsMultipleAttempts(
+          this.props.token,
+          {seed_artists: this.state.selections.artists, seed_genres: this.state.selections.genres}
+        ).then((res) => {
+            let totalRecs = [],
+                tracks = [],
+                used = [];
+            res.forEach((i) => {
+              console.log(i);
+              if(i.data && i.data.tracks){
+                totalRecs.push(...i.data.tracks);
+              }
+            });
+            console.log(totalRecs);
+            if(totalRecs.length){
+              for(let i = 0; i < totalRecs.length; i++){
+                let rec = totalRecs[i];
+                if(rec.artists.length && rec.artists[0].id){
+                  // filter out the seed artists and any duplicate artists
+                  // ensure that the returned track list is all different artists
+                  if(!used.includes(rec.artists[0].id) && !this.state.selections.artists.includes(rec.artists[0].id)){
+                    used.push(rec.artists[0].id);
+                    tracks.push(rec);
+                  }
+                }
+                // only allow up to 100 tracks to be returned in the final list
+                if(tracks.length == TOTAL_RECOMMENDATIONS_ALLOWED){
+                  break;
                 }
               }
-              // only allow up to 100 tracks to be returned in the final list
-              if(tracks.length == TOTAL_RECOMMENDATIONS_ALLOWED){
-                break;
-              }
             }
-          }
-          this.setState((p) => ({
-            ...p,
-            isFetching: false,
-            hasFetched: true,
-            errorFetching: false,
-            playlist: { name: p.playlist.name, tracks }
-          }));
-        }).catch((err) => {
-          console.log(err);
-          this.setState({isFetching: false, hasFetched: true, errorFetching: true});
-        })
+            this.setState((p) => ({
+              ...p,
+              isFetching: false,
+              hasFetched: true,
+              errorFetching: false,
+              playlist: { name: p.playlist.name, tracks }
+            }));
+          }).catch((err) => {
+            console.log(err);
+            this.setState({isFetching: false, hasFetched: true, errorFetching: true});
+          });
+      }
+      else{
+
+      }
     }
   }
   render() {
-    console.log(this.state);
     return(
       <div className="main">
         {!this.state.isFetching && !this.state.hasFetched ? (
