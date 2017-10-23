@@ -111,7 +111,6 @@ export default class Main extends React.Component {
               playlist: { name: p.playlist.name, tracks }
             }));
           }).catch((err) => {
-            console.log(err);
             this.setState({isFetching: false, hasFetched: true, errorFetching: true});
           });
       }
@@ -140,6 +139,8 @@ export default class Main extends React.Component {
             token={this.props.token}
             playlist={this.state.playlist}
             reset={this.reset.bind(this)}
+            selections={this.state.selections}
+            user={this.props.user}
             />
         )}
       </div>

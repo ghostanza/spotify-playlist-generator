@@ -9,8 +9,14 @@ export default class LoginButton extends React.Component {
         response_type = 'code',
         login_link = `${auth_link}?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=${response_type}`;
     return(
-      <div className='login-btn-wrap'>
-        <a href={login_link} className='login-btn'>Get Started</a>
+      <div className='login'>
+        <div className='content'>
+          <h2>{this.props.appName}</h2>
+          <p>
+            Provide up to 5 different artists and/or genres and we will ll give you back a unique playlist!
+          </p>
+          <div className='login-btn'><a href={login_link}>Get Started</a></div>
+        </div>
       </div>
     )
   }

@@ -11,7 +11,8 @@ export default class App extends React.Component {
       userInfo: [],
       topArtists: {},
       playlists: [],
-      genreOptions: []
+      genreOptions: [],
+      appName: 'cAUlDrOn'
     }
   }
   componentWillMount(){
@@ -37,7 +38,7 @@ export default class App extends React.Component {
   render() {
     return(
       <div>
-        {this.state.token ? (<Main token={this.state.token} topArtists={this.state.topArtists} playlists={this.state.playlists} genres={this.state.genreOptions}/>) : (<Login />)}
+        {this.state.token ? (<Main token={this.state.token} user={this.state.userInfo} topArtists={this.state.topArtists} playlists={this.state.playlists} genres={this.state.genreOptions} appName={this.state.appName}/>) : (<Login appName={this.state.appName}/>)}
       </div>
      );
   }

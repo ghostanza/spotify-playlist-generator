@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+@import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative:900|Raleway:400,700');
 $dk: #222;
 $accent: orange;
 @mixin flex-center{
@@ -46,6 +46,43 @@ ul{
     user-select: none;
     border-bottom: 1px solid rgba($dk, 0.2);
   }
+}
+
+// LOGIN
+.login{
+  height: 100vh;
+  background: $dk;
+  margin: 0 auto;
+  @include flex-center;
+  & .content{
+    width: 90%;
+    color: white;
+    text-align: center;
+  }
+  & .login-btn a{
+    cursor: pointer;
+    color: white;
+    display: block;
+    text-decoration: none;
+    margin-top: 50px;
+    padding: 15px 0;
+    border: 1px solid orange;
+    border-radius: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+p{
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  line-height: 20px;
+}
+h2{
+  font-family: 'Cinzel Decorative';
+  font-weight: 900;
+  font-size: 40px;
+  margin: 0;
 }
 
 // TAB COMPONENT
@@ -329,5 +366,119 @@ ul.list{
     & .selection-name, .selection-remove{
       box-sizing: border-box;
     }
+  }
+}
+.playlist-build{
+  width:100%;
+  height: 90vh;
+  @include flex-center;
+}
+.loading-playlist{
+  width: 75vmin;
+  height: 75vmin;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+  @include flex-center;
+    &:before{
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border-width: 0px 0px 2px 2px;
+      border-style: solid;
+      border-color: $accent;
+      border-radius: 100%;
+      animation: spin 2s linear infinite;
+    }
+}
+@keyframes spin{
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+// SAVE OR RESTART
+.save-or-restart{
+  width: 90%;
+  & .heading{
+    font-size: 24px;
+    font-weight: bold;
+    & .based-on{
+      text-transform: capitalize;
+      font-size: 16px;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid orange;
+    }
+    & .playlist-artists{
+      font-size: 12px;
+      font-style: italic;
+      margin-bottom: 45px;
+    }
+  }
+  & .save, & .restart{
+    cursor: pointer;
+    text-align: center;
+    padding: 20px 0;
+    margin: 20px auto 30px auto;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-size: 14px;
+    box-shadow: 2px 2px 5px rgba($dk, 0.2);
+  }
+  .save{
+    width: 90%;
+    background: orange;
+    color: white;
+  }
+  .restart{
+    width: 65%;
+    color: $accent;
+    border: 1px solid;
+  }
+  .is-saving{
+    animation: saving 0.5s linear infinite;
+    height: 10px;
+    width: 0;
+    opacity: 1;
+    margin-top: 30px;
+    background: $accent;
+  }
+}
+@keyframes saving{
+  to{
+    width: 100%;
+    opacity: 0;
+  }
+}
+
+// VIEW OR CONTINUE
+.view-or-continue{
+  width: 90%;
+  & .view-on-spotify, & .make-more{
+    margin: 20px auto;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+  }
+  & .view-on-spotify a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    &:visited{
+      color: white;
+    }
+  }
+  & .view-on-spotify a, & .make-more{
+    padding: 15px 0;
+  }
+  & .view-on-spotify{
+    background: $accent;
+  }
+  & .make-more{
+    background: $dk;
   }
 }

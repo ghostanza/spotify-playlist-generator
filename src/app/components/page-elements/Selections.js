@@ -58,7 +58,7 @@ export default class Selections extends React.Component {
                 </li>
               )
             })}
-            <li className="build" onClick={this.props.fetchRecommendations}>Build Playlist</li>
+            { this.props.selections.all.length ? (<li className="build" onClick={this.props.fetchRecommendations}>Build Playlist</li>) : ''}
           </ul>
         </div>
       </div>

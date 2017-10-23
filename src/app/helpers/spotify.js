@@ -246,6 +246,15 @@ module.exports.getRecommendationSeedGenres = (token) => {
 }
 
 
+/* PLAYLIST */
+module.exports.createPlaylist = (token, userID, name) => {
+  var config = { headers: {'Authorization' : `Bearer ${token}`, 'Content-Type' : 'application/json'}};
+  return axios.post(`https://api.spotify.com/${version}/users/${userID}/playlists`, {name}, config);
+}
+module.exports.addPlaylistTracks = (token, userID, playlistID, trackURIs) => {
+  var config = { headers: {'Authorization' : `Bearer ${token}`, 'Content-Type' : 'application/json'}};
+  return axios.post(`https://api.spotify.com/${version}/users/${userID}/playlists/${playlistID}/tracks`, {uris: trackURIs}, config);
+}
 
 /***** TODO *****
 

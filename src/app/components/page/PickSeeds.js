@@ -4,6 +4,7 @@ import Search from 'page_elements/Search';
 import TopArtists from 'page_elements/TopArtists';
 import List from 'page_elements/List';
 import Selections from 'page_elements/Selections';
+import { createPlaylist, addPlaylistTracks } from 'spotify';
 
 export default class PickSeeds extends React.Component {
   render() {
