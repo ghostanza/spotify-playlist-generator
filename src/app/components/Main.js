@@ -11,7 +11,8 @@ export default class Main extends React.Component {
       selections: {
         all: [],
         genres: [],
-        artists: []
+        artists: [],
+        spices:{}
       },
       isFetching: false,
       hasFetched: false,
@@ -29,7 +30,8 @@ export default class Main extends React.Component {
       selections: {
         all: [],
         genres: [],
-        artists: []
+        artists: [],
+        spices:{}
       },
       isFetching: false,
       hasFetched: false,
@@ -66,6 +68,13 @@ export default class Main extends React.Component {
         });
     }
   }
+  updateSpices(spiceObject){
+    let newSelections = Object.assign({}, this.state.selections);
+    newSelections.spices = spiceObject;
+    this.setState((prev) => {
+      return { ...prev, selections: newSelections }
+    })
+  }
   fetchRecommendations(type){
     const TOTAL_RECOMMENDATIONS_ALLOWED = 30;
     let fetchType = type == 'more' ? type : 'initial';
@@ -76,13 +85,13 @@ export default class Main extends React.Component {
         // although slow, it increases the chances of you getting more unique artists
         getRecommendationsMultipleAttempts(
           this.props.token,
-          {seed_artists: this.state.selections.artists, seed_genres: this.state.selections.genres}
+          {seed_artists: this.state.selections.artists, seed_genres: this.state.selections.genres, tune_track: this.state.selections.spices}
         ).then((res) => {
             let totalRecs = [],
                 tracks = [],
                 used = [];
             res.forEach((i) => {
-              if(i.data && i.data.tracks){
+              if(i.data && i.data.tracks.length){
                 totalRecs.push(...i.data.tracks);
               }
             });
@@ -130,6 +139,7 @@ export default class Main extends React.Component {
             topArtists={this.props.topArtists}
             genreOptions={this.props.genres}
             fetchRecommendations={this.fetchRecommendations.bind(this)}
+            updateSpices={this.updateSpices.bind(this)}
             />
         ) : (
           <PlaylistBuild

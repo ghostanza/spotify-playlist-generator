@@ -11,8 +11,7 @@ export default class App extends React.Component {
       userInfo: [],
       topArtists: {},
       playlists: [],
-      genreOptions: [],
-      appName: 'cAUlDrOn'
+      genreOptions: []
     }
   }
   componentWillMount(){

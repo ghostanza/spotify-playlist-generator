@@ -11,7 +11,7 @@ export default class LoginButton extends React.Component {
     return(
       <div className='login'>
         <div className='content'>
-          <h2>{this.props.appName}</h2>
+          <h2>Audio<br/>cAUlDrOn</h2>
           <p>
             Provide up to 5 different artists and/or genres and we will give you back a unique playlist!
           </p>

@@ -224,9 +224,17 @@ module.exports.getRecommendations = (token, options) => {
   var config = { headers: {'Authorization' : `Bearer ${token}`}},
       seed_artists = options.seed_artists && options.seed_artists.length ? options.seed_artists.join(',') : '',
       seed_genres = options.seed_genres && options.seed_genres.length ? options.seed_genres.join(',') : '',
-      limit = 100;
+      fine_tune = options.tune_track || {},
+      limit = 100,
+      track_attrs = Object.keys(fine_tune).map((k) => {
+        return (
+          fine_tune[k] == 0.5 ? `min_${k}=0`
+          : fine_tune[k] >= 0.7 ? `max_${k}=${fine_tune[k]}&min_${k}=0.5`
+          : `max_${k}=${fine_tune[k]}`
+        );
+      });
 
-  return axios.get(`https://api.spotify.com/${version}/recommendations?seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=${limit}`, config);
+  return axios.get(`https://api.spotify.com/${version}/recommendations?seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=${limit}&${track_attrs.join('&')}`, config);
 }
 
 // Make four of the same recommendations call

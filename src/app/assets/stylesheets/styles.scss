@@ -82,6 +82,12 @@ h2{
   font-family: 'Cinzel Decorative';
   font-weight: 900;
   font-size: 40px;
+  line-height: 44px;
+  margin: 0;
+}
+h3{
+  text-align: left;
+  font-size: 16px;
   margin: 0;
 }
 
@@ -480,5 +486,37 @@ ul.list{
   }
   & .make-more{
     background: $dk;
+  }
+}
+
+//SPICES
+.spices{
+  text-align: left;
+  border-bottom: 1px solid $accent;
+  padding-bottom: 5px;
+  .value.adjusted{
+    font-size: 14px;
+  }
+  h3{
+    margin: 5px 0;
+  }
+  h3+p{
+    font-size: 13px;
+    color: $accent;
+  }
+  p{
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .spice-label{
+    font-size: 10px;
+    font-weight: bold;
+  }
+  input{
+    width: 90%;
+    max-width: 600px;
+  }
+  .spice-selector{
+    margin: 10px 0;
   }
 }
