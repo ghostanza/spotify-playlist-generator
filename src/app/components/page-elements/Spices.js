@@ -42,7 +42,7 @@ export default class Spices extends React.Component {
                 <span className={`value ${this.state.spiceSelections[i.name] && this.state.spiceSelections[i.name] != this.state.defaultVals[i.name] ? 'adjusted' : ''}`}>
                   { this.state.spiceSelections[i.name]
                   && this.state.spiceSelections[i.name] != this.state.defaultVals[i.name]
-                  ? ` ${this.state.spiceSelections[i.name]}/1.0`
+                  ? ` ${(this.state.spiceSelections[i.name] * 100).toFixed(1)}/100`
                   : ` (default)` }
                 </span>
               </p>

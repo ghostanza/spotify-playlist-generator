@@ -229,7 +229,7 @@ module.exports.getRecommendations = (token, options) => {
       track_attrs = Object.keys(fine_tune).map((k) => {
         return (
           fine_tune[k] == 0.5 ? `min_${k}=0`
-          : fine_tune[k] >= 0.7 ? `max_${k}=${fine_tune[k]}&min_${k}=0.5`
+          : fine_tune[k] > 0.5 ? `min_${k}=${fine_tune[k]}`
           : `max_${k}=${fine_tune[k]}`
         );
       });
