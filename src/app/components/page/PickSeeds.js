@@ -17,6 +17,9 @@ export default class PickSeeds extends React.Component {
         <Tab label="My Top Artists">
           <TopArtists artists={this.props.topArtists} updateSelected={this.props.updateSelected} selections={this.props.selections}/>
         </Tab>
+        <Tab label="My Recently Played Artists">
+          <List items={this.props.recentArtists} toggleSelected={this.props.updateSelected} selections={this.props.selections}/>
+        </Tab>
         <Tab label="Spice it Up">
           <Spices updateSpices={this.props.updateSpices}/>
         </Tab>

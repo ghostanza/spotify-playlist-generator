@@ -11,19 +11,33 @@ export default class App extends React.Component {
       userInfo: [],
       topArtists: {},
       playlists: [],
-      genreOptions: []
+      genreOptions: [],
+      recentlyPlayedArtists: []
     }
   }
   componentWillMount(){
     if(this.state.token && this.state.token != 'undefined'){
       getAllUserData(this.state.token).then((res) => {
-        var topArtists = {
+        let topArtists = {
           long_term: res[1][0].data && res[1][0].data.items ? res[1][0].data.items : [],
           medium_term: res[1][1].data && res[1][1].data.items ? res[1][1].data.items : [],
           short_term: res[1][2].data && res[1][2].data.items ? res[1][2].data.items : []
         }
+        let recentlyPlayed =  res[3],
+            recentlyPlayedArtists = [];
+        if(res[3].data && res[3].data.items.length){
+          let used = [];
+          res[3].data.items.forEach((i) => {
+            if(!used.includes(i.track.artists[0].id)){
+              used.push(i.track.artists[0].id);
+              i.track.artists[0].images = i.track.album.images;
+              recentlyPlayedArtists.push(i.track.artists[0]);
+            }
+          });
+        }
+
         this.setState((p) => (
-          {...p, userInfo: res[0].data, topArtists, playlists: res[2].data.items}
+          {...p, userInfo: res[0].data, topArtists, playlists: res[2].data.items, recentlyPlayedArtists}
         ));
       });
 
@@ -37,7 +51,7 @@ export default class App extends React.Component {
   render() {
     return(
       <div>
-        {this.state.token ? (<Main token={this.state.token} user={this.state.userInfo} topArtists={this.state.topArtists} playlists={this.state.playlists} genres={this.state.genreOptions} appName={this.state.appName}/>) : (<Login appName={this.state.appName}/>)}
+        {this.state.token ? (<Main token={this.state.token} user={this.state.userInfo} recentArtists={this.state.recentlyPlayedArtists} topArtists={this.state.topArtists} playlists={this.state.playlists} genres={this.state.genreOptions} appName={this.state.appName}/>) : (<Login appName={this.state.appName}/>)}
       </div>
      );
   }

@@ -137,6 +137,7 @@ export default class Main extends React.Component {
             updateSelected={this.updateSelected}
             token={this.props.token}
             topArtists={this.props.topArtists}
+            recentArtists={this.props.recentArtists}
             genreOptions={this.props.genres}
             fetchRecommendations={this.fetchRecommendations.bind(this)}
             updateSpices={this.updateSpices.bind(this)}

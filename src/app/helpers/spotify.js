@@ -1,5 +1,6 @@
 var axios = require('axios'),
-    version = 'v1';
+    version = 'v1',
+    apiURL = `https://api.spotify.com/${version}`;
 
 module.exports.getOrSetToken = () => {
   var token = document.cookie.match(/.*token=([^;]*).*$/) ? document.cookie.replace(/.*token=([^;]*).*$/,"$1") : '',
@@ -19,7 +20,7 @@ module.exports.getOrSetToken = () => {
 module.exports.getUserInfo = (token) => {
   if(token){
     var config = { headers: {'Authorization': `Bearer ${token}`} };
-    return axios.get(`https://api.spotify.com/${version}/me`, config);
+    return axios.get(`${apiURL}/me`, config);
   }
   else{ return Promise.resolve(''); }
 }
@@ -28,7 +29,7 @@ module.exports.getUserInfo = (token) => {
 module.exports.getPlaylists = (token) => {
   if(token){
     var config = { headers: {'Authorization': `Bearer ${token}`}};
-    return axios.get(`https://api.spotify.com/${version}/me/playlists`, config);
+    return axios.get(`${apiURL}/me/playlists`, config);
   }
   else{
     return Promise.resolve('');
@@ -59,7 +60,7 @@ module.exports.getTop = (token, type, options) => {
         count++
       }
     }
-    return axios.get(`https://api.spotify.com/${version}/me/top/${type}${query}`, config);
+    return axios.get(`${apiURL}/me/top/${type}${query}`, config);
   }
   else{ return Promise.resolve(''); }
 }
@@ -79,7 +80,8 @@ module.exports.getAllUserData = ( token ) => {
     return axios.all([
       module.exports.getUserInfo(token),
       module.exports.getAllTop(token, 'artists'),
-      module.exports.getPlaylists(token)
+      module.exports.getPlaylists(token),
+      module.exports.getRecentlyPlayed(token, {limit: 50})
     ])
   }
 }
@@ -88,7 +90,7 @@ module.exports.getAllUserData = ( token ) => {
 module.exports.getPlayerInfo = (token) => {
   if(token){
     var config = { headers: {'Authorization': `Bearer ${token}`} };
-    return axios.get(`https://api.spotify.com/${version}/me/player`, config);
+    return axios.get(`${apiURL}/me/player`, config);
   }
   else{ return Promise.resolve(''); }
 }
@@ -96,7 +98,7 @@ module.exports.getPlayerInfo = (token) => {
 module.exports.getCurrentlyPlaying = (token) => {
   if(token){
     var config = { headers: {'Authorization': `Bearer ${token}`} };
-    return axios.get(`https://api.spotify.com/${version}/me/player/currently-playing`, config);
+    return axios.get(`${apiURL}/me/player/currently-playing`, config);
   }
   else{ return Promise.resolve(''); }
 }
@@ -113,12 +115,10 @@ module.exports.getRecentlyPlayed = (token, options) => {
         count++
       }
     }
-    return axios.get(`https://api.spotify.com/${version}/me/player/recently-played${query}`, config);
+    return axios.get(`${apiURL}/me/player/recently-played${query}`, config);
   }
   else { return Promise.resolve(''); }
 }
-
-
 /********* TRACK RELATED ENDPOINTS *******************/
 // returns detailed information about a given track ID
 /* link to old EchoNest docs on interpreting the output of this call, the spotify docs don't have this explained yet:
@@ -127,7 +127,7 @@ https://web.archive.org/web/20160528174915/http://developer.echonest.com/docs/v4
 module.exports.getAudioAnalysis = (token, track_id) => {
   if(token && track_id){
     var config = { headers: {'Authorization': `Bearer ${token}`} };
-    return axios.get(`https://api.spotify.com/${version}/audio-analysis/${track_id}`, config);
+    return axios.get(`${apiURL}/audio-analysis/${track_id}`, config);
   }
   else{ return Promise.resolve(''); }
 }
@@ -136,7 +136,7 @@ module.exports.getAudioAnalysis = (token, track_id) => {
 module.exports.getAudioFeatures = (token, track_ids) => {
   if(token && track_ids){
     var config = { headers: {'Authorization': `Bearer ${token}`} };
-    return axios.get(`https://api.spotify.com/${version}/audio-features/${typeof track_ids === 'object' ? `?ids=${track_ids.join(',')}`: track_ids}`, config);
+    return axios.get(`${apiURL}/audio-features/${typeof track_ids === 'object' ? `?ids=${track_ids.join(',')}`: track_ids}`, config);
   }
   else{  return Promise.resolve(''); }
 }
@@ -144,7 +144,7 @@ module.exports.getAudioFeatures = (token, track_ids) => {
 module.exports.getTrackInfo = (token, track_id) => {
   if(token && track_id){
     var config = { headers: {'Authorization': `Bearer ${token}`} };
-    return axios.get(`https://api.spotify.com/${version}/tracks/${track_id}`, config);
+    return axios.get(`${apiURL}/tracks/${track_id}`, config);
   }
 }
 
@@ -159,7 +159,7 @@ module.exports.getAllTrackInfo = (token, track_id) => {
 module.exports.getAlbumInfo = (token, album_id) => {
   if(token && album_id){
     var config = { headers : {'Authorization' : `Bearer ${token}`}};
-    return axios.get(`https://api.spotify.com/${version}/albums/${album_id}`, config);
+    return axios.get(`${apiURL}/albums/${album_id}`, config);
   }
 }
 
@@ -167,16 +167,16 @@ module.exports.getAlbumInfo = (token, album_id) => {
 /******* ARTIST RELATED ENDPOINTS **********/
 module.exports.getArtists = (token, artist_ids) => {
   var config = { headers: {'Authorization': `Bearer ${token}`} };
-  return axios.get(`https://api.spotify.com/${version}/artists/${typeof artist_ids === 'object' ? `?ids=${artist_ids.join(',')}`: artist_ids}`, config);
+  return axios.get(`${apiURL}/artists/${typeof artist_ids === 'object' ? `?ids=${artist_ids.join(',')}`: artist_ids}`, config);
 }
 
 module.exports.getRelatedArtists = (token, artist_id) => {
   var config = { headers: {'Authorization': `Bearer ${token}`} };
-  return axios.get(`https://api.spotify.com/${version}/artists/${artist_id}/related-artists?limit=15`, config);
+  return axios.get(`${apiURL}/artists/${artist_id}/related-artists?limit=15`, config);
 }
 module.exports.getArtistTopTracks = (token, artist_id, country = 'US') => {
   var config = { headers: {'Authorization': `Bearer ${token}`} };
-  return axios.get(`https://api.spotify.com/${version}/artists/${artist_id}/top-tracks?country=${country}`, config);
+  return axios.get(`${apiURL}/artists/${artist_id}/top-tracks?country=${country}`, config);
 }
 
 module.exports.getArtistAlbums = (token, artist_id, options) => {
@@ -190,7 +190,7 @@ module.exports.getArtistAlbums = (token, artist_id, options) => {
       count++
     }
   }
-  return axios.get(`https://api.spotify.com/${version}/artists/${artist_id}/albums/${query}`, config);
+  return axios.get(`${apiURL}/artists/${artist_id}/albums/${query}`, config);
 }
 
 module.exports.getAllArtistInfo = (token, artist_id, country, options) => {
@@ -207,7 +207,7 @@ module.exports.getFilteredArtists = (token, filter, value, limit=30) => {
         'label': 1
       };
   if(allowed[filter]){
-    return axios.get(`https://api.spotify.com/${version}/search?q=${filter}:%22${value}%22&type=artist&limit=${limit}`, config);
+    return axios.get(`${apiURL}/search?q=${filter}:%22${value}%22&type=artist&limit=${limit}`, config);
   }
 }
 
@@ -216,7 +216,7 @@ module.exports.getSearchResults = (token, searchType, query) => {
       config = { headers: {'Authorization': `Bearer ${token}`} },
       // TODO:  Change the hard-coded limit to an object so you can pass offsets too for multiple pages
       limit = 50;
-  return axios.get(`https://api.spotify.com/${version}/search?q=${query}&type=${searchType}&limit=50`, config);
+  return axios.get(`${apiURL}/search?q=${query}&type=${searchType}&limit=50`, config);
 }
 
 
@@ -234,7 +234,7 @@ module.exports.getRecommendations = (token, options) => {
         );
       });
 
-  return axios.get(`https://api.spotify.com/${version}/recommendations?seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=${limit}&${track_attrs.join('&')}`, config);
+  return axios.get(`${apiURL}/recommendations?seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=${limit}&${track_attrs.join('&')}`, config);
 }
 
 // Make four of the same recommendations call
@@ -250,18 +250,18 @@ module.exports.getRecommendationsMultipleAttempts = (token, options) => {
 module.exports.getRecommendationSeedGenres = (token) => {
   var config = { headers: {'Authorization' : `Bearer ${token}`}};
 
-  return axios.get(`https://api.spotify.com/${version}/recommendations/available-genre-seeds`, config);
+  return axios.get(`${apiURL}/recommendations/available-genre-seeds`, config);
 }
 
 
 /* PLAYLIST */
 module.exports.createPlaylist = (token, userID, name) => {
   var config = { headers: {'Authorization' : `Bearer ${token}`, 'Content-Type' : 'application/json'}};
-  return axios.post(`https://api.spotify.com/${version}/users/${userID}/playlists`, {name}, config);
+  return axios.post(`${apiURL}/users/${userID}/playlists`, {name}, config);
 }
 module.exports.addPlaylistTracks = (token, userID, playlistID, trackURIs) => {
   var config = { headers: {'Authorization' : `Bearer ${token}`, 'Content-Type' : 'application/json'}};
-  return axios.post(`https://api.spotify.com/${version}/users/${userID}/playlists/${playlistID}/tracks`, {uris: trackURIs}, config);
+  return axios.post(`${apiURL}/users/${userID}/playlists/${playlistID}/tracks`, {uris: trackURIs}, config);
 }
 
 /***** TODO *****
