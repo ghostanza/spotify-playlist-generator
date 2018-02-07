@@ -20,7 +20,7 @@ export default class PlaylistBuild extends React.Component {
     let name = this.state.customPlaylistName || '';
     if(!name){
       let builtName = this.props.selections.all.map((i) => { return i.name });
-      name = `Cauldron - ${builtName.join(', ')}`;
+      name = `AudioCauldron - ${builtName.join(', ')}`;
     }
     createPlaylist(this.props.token, this.props.user.id, name).then((res) => {
       if(res.status == 201 || res.status == 200){
