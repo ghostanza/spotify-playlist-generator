@@ -12,8 +12,19 @@ export default class App extends React.Component {
       topArtists: {},
       playlists: [],
       genreOptions: [],
-      recentlyPlayedArtists: []
+      recentlyPlayedArtists: [],
+      type: ''
     }
+  }
+  changeType(e){
+    //e.preventDefault();
+    console.log(e.target.value);
+    this.setState({type: e.target.value});
+    /*
+    this.setState((p) => {
+      return {...p, type: e.target.value}
+    });
+    */
   }
   componentWillMount(){
     if(this.state.token && this.state.token != 'undefined'){
@@ -51,7 +62,28 @@ export default class App extends React.Component {
   render() {
     return(
       <div>
-        {this.state.token ? (<Main token={this.state.token} user={this.state.userInfo} recentArtists={this.state.recentlyPlayedArtists} topArtists={this.state.topArtists} playlists={this.state.playlists} genres={this.state.genreOptions} appName={this.state.appName}/>) : (<Login appName={this.state.appName}/>)}
+        {this.state.token ? (
+            this.state.type.length ? (
+              <Main token={this.state.token}
+                user={this.state.userInfo}
+                recentArtists={this.state.recentlyPlayedArtists}
+                topArtists={this.state.topArtists}
+                playlists={this.state.playlists}
+                genres={this.state.genreOptions}
+                appName={this.state.appName}
+                type={this.state.type}
+                />
+            ) : (
+                <div className="pick-type">
+                  <select className="pick-type-select" value={this.state.type} onChange={this.changeType.bind(this)}>
+                    <option value=''>Select One</option>
+                    <option value="artist">Artist</option>
+                    <option value="label">Record Label</option>
+                    <option value="genre">Genre</option>
+                  </select>
+                </div>
+              )
+            ) : (<Login appName={this.state.appName}/>)}
       </div>
      );
   }

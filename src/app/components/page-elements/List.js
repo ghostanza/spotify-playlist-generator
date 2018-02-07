@@ -7,7 +7,7 @@ export default class List extends React.Component {
   }
   triggerSelection(e){
     let info = JSON.parse(e.currentTarget.dataset.info);
-    this.props.toggleSelected(info);
+    this.props.toggleSelected(info, this.props.fetchImmediately);
   }
   render() {
     let selected = this.props.selections.all.map((i) => { return i.id });

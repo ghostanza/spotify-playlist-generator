@@ -1,5 +1,7 @@
 import React from 'react';
 import PickSeeds from 'page/PickSeeds';
+import PickLabel from 'page/PickLabel';
+import PickGenre from 'page/PickGenre';
 import PlaylistBuild from 'page/PlaylistBuild';
 import {getRecommendationsMultipleAttempts} from 'spotify';
 import {arrayOfObjectsContains} from '../helpers/functions';
@@ -42,7 +44,7 @@ export default class Main extends React.Component {
       }
     });
   }
-  updateSelected(info){
+  updateSelected(info, fetchImmediately){
     let newSelected = Object.assign({}, this.state.selections),
         [isAlreadySelected, index] = arrayOfObjectsContains(newSelected.all, 'id', info.id);
     // the max number of items we can send is 5
@@ -57,6 +59,9 @@ export default class Main extends React.Component {
       this.setState((prev) => {
         return { ...prev, selections: newSelected }
       });
+      if(fetchImmediately){
+        this.fetchRecommendations();
+      }
     }
     // if there are more than 4 items in the selection list
     // allow for items to be removed but not added
@@ -132,6 +137,23 @@ export default class Main extends React.Component {
     return(
       <div className="main">
         {!this.state.isFetching && !this.state.hasFetched ? (
+          this.props.type == 'label' ? (
+            <PickLabel
+              selections={this.state.selections}
+              updateSelected={this.updateSelected}
+              token={this.props.token}
+              fetchRecommendations={this.fetchRecommendations.bind(this)}
+              />
+          ) : this.props.type == 'genre' ? (
+            <PickGenre
+              selections={this.state.selections}
+              updateSelected={this.updateSelected}
+              token={this.props.token}
+              fetchRecommendations={this.fetchRecommendations.bind(this)}
+              options={this.props.genres}
+              />
+          ) :
+          (
           <PickSeeds
             selections={this.state.selections}
             updateSelected={this.updateSelected}
@@ -142,6 +164,7 @@ export default class Main extends React.Component {
             fetchRecommendations={this.fetchRecommendations.bind(this)}
             updateSpices={this.updateSpices.bind(this)}
             />
+          )
         ) : (
           <PlaylistBuild
             isFetching={this.state.isFetching}
