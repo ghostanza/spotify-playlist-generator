@@ -11,6 +11,7 @@ export default class List extends React.Component {
   }
   render() {
     let selected = this.props.selections.all.map((i) => { return i.id });
+    console.log(this.props.boxes);
     return(
       <ul className={`list ${this.props.type ? this.props.type : ''}`}>
         {this.props.items.map((i) => {

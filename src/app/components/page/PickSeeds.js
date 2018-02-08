@@ -17,9 +17,6 @@ export default class PickSeeds extends React.Component {
   render() {
     return(
       <div>
-        <Tab label="Search For Label">
-          <Search selections={this.props.selections} updateSelected={this.props.updateSelected} token={this.props.token}/>
-        </Tab>
         <Tab label="Search For Artists">
           <Search selections={this.props.selections} updateSelected={this.props.updateSelected} token={this.props.token}/>
         </Tab>

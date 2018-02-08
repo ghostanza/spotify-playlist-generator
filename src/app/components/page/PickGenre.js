@@ -16,13 +16,13 @@ export default class PickGenre extends React.Component {
   }
   render() {
     return(
-      <div>
+      <div className='pick-genre'>
         Genre
         <p>Allow Multi: {this.state.fetchMulti ? "YES" : "NO"}</p>
         <label htmlFor='multi'>Allow multi?</label>
         <input id='multi' type="checkbox" checked={this.state.fetchMulti} onChange={this.toggleMulti.bind(this)}/>
-        <List items={this.props.options} fetchImmediately={!this.state.fetchMulti} toggleSelected={this.props.updateSelected} selections={this.props.selections}/>
-        <div onClick={this.props.fetchRecommendations}>Fetch</div>
+        <List items={this.props.options} boxes fetchImmediately={!this.state.fetchMulti} toggleSelected={this.props.updateSelected} selections={this.props.selections}/>
+        {this.state.fetchMulti ? (<Selections selections={this.props.selections} toggleSelected={this.props.updateSelected} fetchRecommendations={this.props.fetchRecommendations}/>) : ''}
       </div>
     )
   }

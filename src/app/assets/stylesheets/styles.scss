@@ -269,6 +269,27 @@ ul.list{
   transition: all 0.3s;
 }
 
+.pick-genre ul.list{
+  padding-bottom: 100px;
+  height: auto;
+  & li{
+    float: left;
+    width: 25%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-right: 1px solid rgba($dk, 0.2);
+    &.selected{
+      background: rgba(orange, 0.5);
+    }
+    & .select-img{
+      display: none;
+    }
+  }
+}
+
 // METER
 .selections{
   position: fixed;
