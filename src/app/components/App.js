@@ -16,15 +16,14 @@ export default class App extends React.Component {
       type: ''
     }
   }
-  changeType(e){
-    //e.preventDefault();
-    console.log(e.target.value);
-    this.setState({type: e.target.value});
-    /*
-    this.setState((p) => {
-      return {...p, type: e.target.value}
-    });
-    */
+  setArtists(){
+    this.setState({type:'artist'});
+  }
+  setGenres(){
+    this.setState({type:'genre'});
+  }
+  setLabels(){
+    this.setState({type:'label'});
   }
   componentWillMount(){
     if(this.state.token && this.state.token != 'undefined'){
@@ -75,12 +74,11 @@ export default class App extends React.Component {
                 />
             ) : (
                 <div className="pick-type">
-                  <select className="pick-type-select" value={this.state.type} onChange={this.changeType.bind(this)}>
-                    <option value=''>Select One</option>
-                    <option value="artist">Artist</option>
-                    <option value="label">Record Label</option>
-                    <option value="genre">Genre</option>
-                  </select>
+                  <div className="type-selections">
+                    <h2 onClick={this.setArtists.bind(this)}>Artists</h2>
+                    <h2 onClick={this.setGenres.bind(this)}>Genres</h2>
+                    <h2 onClick={this.setLabels.bind(this)}>Labels</h2>
+                  </div>
                 </div>
               )
             ) : (<Login appName={this.state.appName}/>)}

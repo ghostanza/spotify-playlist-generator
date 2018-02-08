@@ -271,7 +271,8 @@ ul.list{
 
 .pick-genre ul.list{
   padding-bottom: 100px;
-  height: auto;
+  height: 70vh;
+  margin-top: 20px;
   & li{
     float: left;
     width: 25%;
@@ -281,6 +282,9 @@ ul.list{
     justify-content: center;
     padding: 0;
     border-right: 1px solid rgba($dk, 0.2);
+    @media all and (max-width: 500px){
+      width: 33%
+    }
     &.selected{
       background: rgba(orange, 0.5);
     }
@@ -289,7 +293,36 @@ ul.list{
     }
   }
 }
+.pick-type{
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & h2{
+    cursor: pointer;
+    margin: 25px 0;
+    text-align: center;
+    font-family: sans-serif;
+    border-bottom: 3px solid;
+  }
+}
 
+h2.view-heading{
+  font-family: sans-serif;
+  font-size: 30px;
+  margin: 5px 0;
+  text-align: center;
+}
+.allow-multi{
+  text-align: center;
+}
+.pick-genre label{
+  font-weight: bold;
+  margin-left: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
 // METER
 .selections{
   position: fixed;

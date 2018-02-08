@@ -8,15 +8,9 @@ import Spices from 'page_elements/Spices';
 import { createPlaylist, addPlaylistTracks, getFilteredArtists } from 'spotify';
 
 export default class PickSeeds extends React.Component {
-  componentWillMount(){
-    console.log(this.props.token);
-    getFilteredArtists(this.props.token, 'label', 'tri angle').then((r) => {
-      console.log(r.data);
-    });
-  }
   render() {
     return(
-      <div>
+      <div className='pick-artist'>
         <Tab label="Search For Artists">
           <Search selections={this.props.selections} updateSelected={this.props.updateSelected} token={this.props.token}/>
         </Tab>
@@ -25,9 +19,6 @@ export default class PickSeeds extends React.Component {
         </Tab>
         <Tab label="My Recently Played Artists">
           <List items={this.props.recentArtists} toggleSelected={this.props.updateSelected} selections={this.props.selections}/>
-        </Tab>
-        <Tab label="Spice it Up">
-          <Spices updateSpices={this.props.updateSpices}/>
         </Tab>
         <Selections selections={this.props.selections} toggleSelected={this.props.updateSelected} fetchRecommendations={this.props.fetchRecommendations}/>
       </div>
