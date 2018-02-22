@@ -25,6 +25,9 @@ export default class App extends React.Component {
   setLabels(){
     this.setState({type:'label'});
   }
+  resetType(){
+    this.setState({type:''});
+  }
   componentWillMount(){
     if(this.state.token && this.state.token != 'undefined'){
       getAllUserData(this.state.token).then((res) => {
@@ -61,6 +64,7 @@ export default class App extends React.Component {
   render() {
     return(
       <div>
+        <div className='logo' onClick={this.resetType.bind(this)}><span>A</span>C</div>
         {this.state.token ? (
             this.state.type.length ? (
               <Main token={this.state.token}

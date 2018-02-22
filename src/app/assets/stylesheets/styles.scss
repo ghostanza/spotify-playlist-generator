@@ -6,6 +6,33 @@ $accent: orange;
   justify-content: center;
   display: flex;
 }
+.logo{
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  color: $accent;
+  cursor: pointer;
+  text-align: center;
+  margin: 10px;
+  border-radius: 50%;
+  border: 3px solid;
+  font-family: 'Raleway', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  transform: rotate(90deg);
+  & span{
+    transform: rotate(-90deg);
+    position: relative;
+    left: 1px;
+  }
+  @media all and (min-width: 600px){
+    &:hover{ color: $dk; }
+  }
+}
 html, body{
   font-family: 'Raleway',sans-serif;
   letter-spacing: 0.5px;
