@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative:900|Raleway:400,700');
 $dk: #222;
 $accent: orange;
+$spotify: #1ED760;
 @mixin flex-center{
   align-items: center;
   justify-content: center;
   display: flex;
+}
+.spotify{
+  color: #1ED760;
 }
 .header .type{
   display: inline-block;
@@ -101,12 +105,12 @@ ul{
   }
   & .login-btn a{
     cursor: pointer;
-    color: $accent;
+    color: white;
     display: block;
     text-decoration: none;
     margin-top: 50px;
     padding: 15px 0;
-    border: 1px solid $accent;
+    background: $accent;
     border-radius: 50px;
     font-weight: bold;
     text-transform: uppercase;
