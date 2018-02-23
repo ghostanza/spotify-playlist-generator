@@ -6,10 +6,17 @@ $accent: orange;
   justify-content: center;
   display: flex;
 }
+.header .type{
+  display: inline-block;
+  font-size: 24px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
 .logo{
   width: 50px;
   height: 50px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -77,23 +84,29 @@ ul{
 
 // LOGIN
 .login{
-  height: 100vh;
-  background: $dk;
+  height: 70vh;
   margin: 0 auto;
   @include flex-center;
   & .content{
     width: 90%;
-    color: white;
+    color: $dk;
     text-align: center;
+  }
+  @media all and (min-width: 600px){
+    & .login-btn{
+      width: 50%;
+      margin: 0 auto;
+      min-width: 150px;
+    }
   }
   & .login-btn a{
     cursor: pointer;
-    color: white;
+    color: $accent;
     display: block;
     text-decoration: none;
     margin-top: 50px;
     padding: 15px 0;
-    border: 1px solid orange;
+    border: 1px solid $accent;
     border-radius: 50px;
     font-weight: bold;
     text-transform: uppercase;
@@ -322,7 +335,7 @@ ul.list{
 }
 .pick-type{
   width: 100%;
-  height: 90vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;

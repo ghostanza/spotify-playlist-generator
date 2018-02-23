@@ -64,7 +64,13 @@ export default class App extends React.Component {
   render() {
     return(
       <div>
-        <div className='logo' onClick={this.resetType.bind(this)}><span>A</span>C</div>
+        <div className='header'>
+          <div className='logo' onClick={this.resetType.bind(this)}><span>A</span>C</div>
+          <div className='type'>{this.state.type.length
+              ? (this.state.type.charAt(this.state.type.length - 1) == 's'
+                    ? this.state.type : `${this.state.type}s`)
+              : ''}</div>
+        </div>
         {this.state.token ? (
             this.state.type.length ? (
               <Main token={this.state.token}
