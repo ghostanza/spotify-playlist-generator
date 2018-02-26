@@ -17,7 +17,6 @@ export default class PickGenre extends React.Component {
   render() {
     return(
       <div className='pick-genre'>
-        <h2 className='view-heading'>Genre</h2>
         <div className='allow-multi'>
           <label htmlFor='multi'>Allow multiple genres:</label>
           <input id='multi' type="checkbox" checked={this.state.fetchMulti} onChange={this.toggleMulti.bind(this)}/>
