@@ -10,6 +10,13 @@ $spotify: #1ED760;
 .spotify{
   color: #1ED760;
 }
+.content{
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.content.fade{
+  opacity: 0.3;
+}
 .header .type{
   display: inline-block;
   font-size: 24px;

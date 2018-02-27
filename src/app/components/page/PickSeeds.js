@@ -11,15 +11,17 @@ export default class PickSeeds extends React.Component {
   render() {
     return(
       <div className='pick-artist'>
-        <Tab label="Search" toggle>
-          <Search selections={this.props.selections} updateSelected={this.props.updateSelected} token={this.props.token}/>
-        </Tab>
-        <Tab label="Top Artists" fullwidth>
-          <TopArtists artists={this.props.topArtists} updateSelected={this.props.updateSelected} selections={this.props.selections}/>
-        </Tab>
-        <Tab label="Recently Played" fullwidth>
-          <List items={this.props.recentArtists} toggleSelected={this.props.updateSelected} selections={this.props.selections}/>
-        </Tab>
+        <div className='content'>
+          <Tab label="Search" toggle>
+            <Search selections={this.props.selections} updateSelected={this.props.updateSelected} token={this.props.token}/>
+          </Tab>
+          <Tab label="Top Artists" fullwidth>
+            <TopArtists artists={this.props.topArtists} updateSelected={this.props.updateSelected} selections={this.props.selections}/>
+          </Tab>
+          <Tab label="Recently Played" fullwidth>
+            <List items={this.props.recentArtists} toggleSelected={this.props.updateSelected} selections={this.props.selections}/>
+          </Tab>
+        </div>
         <Selections selections={this.props.selections} toggleSelected={this.props.updateSelected} fetchRecommendations={this.props.fetchRecommendations}/>
       </div>
     )
