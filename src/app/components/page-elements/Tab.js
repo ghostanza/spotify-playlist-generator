@@ -14,8 +14,8 @@ export default class Tab extends React.Component {
   }
   render() {
     return(
-      <div className='tab'>
-        {this.props.label ? (<span className='tab-label closed' onClick={this.toggleOpen}>{this.props.label}</span>) : ''}
+      <div className={`tab ${this.props.fullwidth ? 'full-width' : ''}`}>
+        {this.props.label ? (<span className={`tab-label ${this.props.toggle ? 'toggle closed' : ''}`} onClick={this.toggleOpen}>{this.props.label}</span>) : ''}
         <div className='tab-content'>
           {this.props.children}
         </div>

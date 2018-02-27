@@ -140,6 +140,9 @@ h3{
   margin: 5px auto;
   width: 95%;
 }
+.tab.full-width{
+  width: 100%;
+}
 .tab-content{
   max-height: 600px;
   text-align: center;
@@ -147,12 +150,29 @@ h3{
   overflow: hidden;
   transition: max-height 0.4s;
 }
-.tab-label.closed + .tab-content{
+.tab-label{
+  font-size: 14px;
+  color: white;
+  background: $dk;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+  display: block;
+  text-align: right;
+  border-bottom: 1px solid $accent;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.tab-label.toggle.closed + .tab-content{
   max-height: 0px;
 }
-.tab-label{
+.tab-label.toggle{
+  letter-spacing: 0.5px;
+  padding: 0;
+  text-align: left;
   display: block;
   line-height: 50px;
+  margin: 0;
   padding-left: 10px;
   box-sizing: border-box;
   border: 1px solid;
@@ -172,7 +192,7 @@ h3{
     transition: transform 0.2s;
   }
 }
-.tab-label.closed{
+.tab-label.toggle.closed{
   background: transparent;
   color: $dk;
   &:after{
@@ -216,7 +236,9 @@ h3{
   align-items: center;
   justify-content: space-around;
   background: transparent;
-  padding: 10px 0;
+  padding: 5px 0;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 span.time-range{
   border-bottom: 1px solid rgba(0,0,0,0.2);
@@ -235,9 +257,6 @@ ul.list{
   text-align: left;
   overflow: scroll;
   white-space: nowrap;
-  border-bottom: 1px solid $accent;
-  border-top: 1px solid rgba(200,200,200,0.2);
-  box-shadow: inset 0px 5px 3px rgba(200,200,200,0.1);
 
 }
 .list li{
@@ -245,7 +264,8 @@ ul.list{
   display: inline-block;
   vertical-align: top;
   border: none;
-  margin: 10px 5px;
+  margin: 5px;
+  padding: 0;
   transition: background 0.3s;
   text-align: center;
 }
@@ -268,10 +288,23 @@ ul.list{
     }
   }
 }
-
 .list .select-img{
   width: 80px;
   height: 80px;
+}
+.list .name{
+  width: 80px;
+}
+@media all and (min-width: 600px){
+  .list .select-img{
+    width: 100px;
+    height: 100px;
+  }
+  .list .name{
+    width: 100px;
+  }
+}
+.list .select-img{
   background-size: auto 105%;
   background-color: white;
   background-position: center center;
@@ -302,7 +335,6 @@ ul.list{
 
 .list .name{
   display: block;
-  width: 80px;
   font-size: 10px;
   margin: 10px auto 5px auto;
   font-weight: 700;
