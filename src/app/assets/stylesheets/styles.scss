@@ -47,6 +47,12 @@ $spotify: #1ED760;
     position: relative;
     left: 1px;
   }
+  &.large{
+    width: 175px;
+    height: 175px;
+    font-size: 105px;
+    border: 10px solid;
+  }
   @media all and (min-width: 600px){
     &:hover{ color: $dk; }
   }
@@ -517,21 +523,12 @@ h2.view-heading{
   width: 75vmin;
   height: 75vmin;
   box-sizing: border-box;
-  display: flex;
-  position: relative;
   @include flex-center;
-    &:before{
-      position: absolute;
-      content: '';
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-      border-width: 0px 0px 2px 2px;
-      border-style: solid;
-      border-color: $accent;
-      border-radius: 100%;
-      animation: spin 2s linear infinite;
-    }
+  position: relative;
+  & .logo{
+    color: $dk;
+    animation: spin 1.5s linear infinite;
+  }
 }
 @keyframes spin{
   to{

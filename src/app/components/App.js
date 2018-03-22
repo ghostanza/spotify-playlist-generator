@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './Login';
+import Logo from './Logo';
 import Main from './Main';
 import { getAllUserData, getRecommendationSeedGenres } from 'spotify';
 
@@ -65,7 +66,7 @@ export default class App extends React.Component {
     return(
       <div>
         <div className='header'>
-          <div className='logo' onClick={this.resetType.bind(this)}><span>A</span>C</div>
+          <Logo onClick={this.resetType.bind(this)}/>
           <div className='type'>{this.state.type.length
               ? (this.state.type.charAt(this.state.type.length - 1) == 's'
                     ? this.state.type : `${this.state.type}s`)
