@@ -15,10 +15,10 @@ export default class PickSeeds extends React.Component {
           <Tab label="Search" toggle>
             <Search selections={this.props.selections} updateSelected={this.props.updateSelected} token={this.props.token}/>
           </Tab>
-          <Tab label="Top Artists" fullwidth>
+          <Tab label="Top Artists" toggle>
             <TopArtists artists={this.props.topArtists} updateSelected={this.props.updateSelected} selections={this.props.selections}/>
           </Tab>
-          <Tab label="Recently Played" fullwidth>
+          <Tab label="Recently Played" toggle>
             <List items={this.props.recentArtists} toggleSelected={this.props.updateSelected} selections={this.props.selections}/>
           </Tab>
         </div>

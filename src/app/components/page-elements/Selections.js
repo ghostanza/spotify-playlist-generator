@@ -23,8 +23,8 @@ export default class Selections extends React.Component {
   toggleList(e){
     let tabs = document.querySelectorAll('.tab-label');
     let content = document.querySelector('.content');
-    content.classList.contains('fade') ? content.classList.remove('fade') : content.classList.add('fade');
     if(this.props.selections.all.length){
+      content.classList.contains('fade') ? content.classList.remove('fade') : content.classList.add('fade');
       tabs.forEach((i) => {
         !i.classList.contains('closed') ? i.classList.add('closed') : '';
       })
@@ -33,6 +33,7 @@ export default class Selections extends React.Component {
       }
       e.currentTarget.classList.toggle('open');
     } else if( e.target.classList.contains('open')){
+      content.classList.contains('fade') ? content.classList.remove('fade') : content.classList.add('fade');
       e.currentTarget.classList.remove('open');
       this.setState({ prevRemovedSelections: []})
     }

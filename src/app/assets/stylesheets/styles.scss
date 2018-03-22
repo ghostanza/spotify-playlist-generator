@@ -189,6 +189,7 @@ h3{
   padding-left: 10px;
   box-sizing: border-box;
   border: 1px solid;
+  border-bottom: 1px solid $accent;
   background: $dk;
   position: relative;
   color: white;
@@ -208,6 +209,7 @@ h3{
 .tab-label.toggle.closed{
   background: transparent;
   color: $dk;
+  border: 1px solid;
   &:after{
     transform: rotate(0deg);
   }
