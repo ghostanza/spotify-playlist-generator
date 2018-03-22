@@ -272,7 +272,9 @@ ul.list{
   text-align: left;
   overflow: scroll;
   white-space: nowrap;
-
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
 .list li{
   cursor: pointer;
