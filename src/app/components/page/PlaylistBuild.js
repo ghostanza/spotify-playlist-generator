@@ -15,7 +15,7 @@ export default class PlaylistBuild extends React.Component {
       isSaving: false
     }
   }
-  buildPlaylist(){
+  buildPlaylistAndOpen(){
     this.setState({ isSaving: true });
     let name = this.state.customPlaylistName || '';
     if(!name){
@@ -31,6 +31,7 @@ export default class PlaylistBuild extends React.Component {
         let tracks = this.props.playlist.tracks.map((i) => { return i.uri });
         addPlaylistTracks(this.props.token, this.props.user.id, res.data.id, tracks).then((res) => {
           this.setState({hasSaved: true, isSaving:false});
+          window.open(this.state.playlistURL, "_blank");
         }).catch((err) => {
           this.setState({isSaving: false, errorSaving: true});
         })
@@ -46,7 +47,7 @@ export default class PlaylistBuild extends React.Component {
           : !this.props.isFetching && !this.props.errorFetching && !this.state.hasSaved ? (
               <SaveOrRestart
                 tracks={this.props.playlist.tracks}
-                save={this.buildPlaylist.bind(this)}
+                save={this.buildPlaylistAndOpen.bind(this)}
                 restart={this.props.reset}
                 isSaving={this.state.isSaving}
                 hasSaved={this.state.hasSaved}

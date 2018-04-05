@@ -38,7 +38,7 @@ export default class SaveOrRestart extends React.Component {
       {
         !this.props.isSaving && this.props.tracks.length ? (
           <div>
-            <div onClick={this.props.save} className='save'>Save</div>
+            <div onClick={this.props.save} className='save'>Save & Listen</div>
             <div onClick={this.props.restart} className='restart'>Start Over</div>
           </div>
         ) : this.props.isSaving ? (<div className='is-saving'></div>) : ''
