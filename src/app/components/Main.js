@@ -81,7 +81,7 @@ export default class Main extends React.Component {
     })
   }
   fetchRecommendations(type){
-    const TOTAL_RECOMMENDATIONS_ALLOWED = 30;
+    const TOTAL_RECOMMENDATIONS_ALLOWED = 50;
     let fetchType = type == 'more' ? type : 'initial';
     if(this.props.token && this.state.selections.all.length > 0){
       this.setState({isFetching: true});
