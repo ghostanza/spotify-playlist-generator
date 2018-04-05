@@ -395,6 +395,15 @@ ul.list{
     text-align: center;
     font-family: sans-serif;
     border-bottom: 3px solid;
+    &.coming-soon{
+      color: rgba(0,0,0,0.3);
+      font-size: 14px;
+      margin: 0 0;
+      line-height: 20px;
+      text-transform: uppercase;
+      border-bottom: none;
+      cursor: default;
+    }
   }
 }
 

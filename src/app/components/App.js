@@ -87,8 +87,7 @@ export default class App extends React.Component {
                 <div className="pick-type">
                   <div className="type-selections">
                     <h2 onClick={this.setArtists.bind(this)}>Artists</h2>
-                    <h2 onClick={this.setGenres.bind(this)}>Genres</h2>
-                    <h2 onClick={this.setLabels.bind(this)}>Labels</h2>
+                    <h2 className="coming-soon">Coming Soon:<br/>Genres & Labels</h2>
                   </div>
                 </div>
               )
