@@ -216,7 +216,7 @@ module.exports.getSearchResults = (token, searchType, query) => {
       config = { headers: {'Authorization': `Bearer ${token}`} },
       // TODO:  Change the hard-coded limit to an object so you can pass offsets too for multiple pages
       limit = 50;
-  return axios.get(`${apiURL}/search?q=${query}&type=${searchType}&limit=50`, config);
+  return axios.get(`${apiURL}/search?q=${query}*&type=${searchType}&limit=50`, config);
 }
 
 
